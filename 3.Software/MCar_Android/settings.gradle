@@ -1,0 +1,2 @@
+rootProject.name = "MCar"
+include ':app'

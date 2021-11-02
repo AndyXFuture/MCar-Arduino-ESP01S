@@ -1,0 +1,4 @@
+GPIO0 = 0
+GPIO2 = 2
+TX = 1
+RX = 3
