@@ -20,27 +20,29 @@ unsigned int localUdpPort = 9999;
 char incomingPacket[255];
 
 void flash(){
-      M1_Speed=(BY-BX-AX+AY)/4;
-      M2_Speed=(BY+BX+AX+AY)/4;
-      M3_Speed=(BY-BX+AX+AY)/4;
-      M4_Speed=(BY+BX-AX+AY)/4;
+     M1_Speed=(BY-BX-AX+AY)/4;
+     M2_Speed=(BY+BX+AX+AY)/4;
+     M3_Speed=(BY-BX+AX+AY)/4;
+     M4_Speed=(BY+BX-AX+AY)/4;
 
 
-      local_max=abs(M1_Speed);
-      local_max=max(abs(M2_Speed),local_max);
-      local_max=max(abs(M3_Speed),local_max);
-      local_max=max(abs(M4_Speed),local_max);
+     local_max=abs(M1_Speed);
+     local_max=max(abs(M2_Speed),local_max);
+     local_max=max(abs(M3_Speed),local_max);
+     local_max=max(abs(M4_Speed),local_max);
+     if(local_max == 0){
+        local_max = 16;
+     }
+     //映射
+     M1_Speed=map(M1_Speed,-local_max,local_max,0,1023);
+     M2_Speed=map(M2_Speed,-local_max,local_max,1023,0);
+     M3_Speed=map(M3_Speed,-local_max,local_max,1023,0);
+     M4_Speed=map(M4_Speed,-local_max,local_max,0,1023);
 
-      //映射
-      M1_Speed=map(M1_Speed,-local_max,local_max,0,1023);
-      M2_Speed=map(M2_Speed,-local_max,local_max,1023,0);
-      M3_Speed=map(M3_Speed,-local_max,local_max,1023,0);
-      M4_Speed=map(M4_Speed,-local_max,local_max,0,1023);
-
-      analogWrite(PWM_M1,M1_Speed);
-      analogWrite(PWM_M2,M2_Speed);
-      analogWrite(PWM_M3,M3_Speed);
-      analogWrite(PWM_M4,M4_Speed);
+     analogWrite(PWM_M1,M1_Speed);
+     analogWrite(PWM_M2,M2_Speed);
+     analogWrite(PWM_M3,M3_Speed);
+     analogWrite(PWM_M4,M4_Speed);
 }
 
 
